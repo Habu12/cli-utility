@@ -44,9 +44,9 @@ if __name__ == '__main__':
                 account_id = papi.get_account_id()
                 iam = IdentityAccessManagement(account_switch_key=account_id, logger=logger)
                 result = iam.search_account_name(value=account_id)
-                if not result:  # None or empty list → permission issue (normal for customers)
+                if not result:  # None or empty list ? permission issue (normal for customers)
                     print(f" [WARNING] Account name lookup failed (single-account permission). Using fallback ID: {account_id}")
-                    account = {"accountId": account_id}   # fake dict so show_account_summary works
+                    account = account_id
                 else:
                     account = result[0]
             account = iam.show_account_summary(account)
